@@ -182,6 +182,19 @@ define Device/armada-388-clearfog
 endef
 TARGET_DEVICES += armada-388-clearfog
 
+define Device/armada-385-eliteun250
+  KERNEL_INSTALL := 1
+  KERNEL := dtb | kernel-bin
+  DEVICE_TITLE := Eliteun 250
+  DEVICE_PACKAGES := mkf2fs e2fsprogs kmod-fs-vfat kmod-nls-cp437 kmod-nls-iso8859-1
+  IMAGE := factory.img.gz sysupgrade.ext4.gz
+  IMAGE/sysupgrade.ext4.gz := boot-scr-eliteun | boot-in-rootfs | rootfs-img | gzip | append-metadata
+  IMAGE/factory.img.gz := boot-scr-eliteun | boot-in-rootfs | boot-img | fetch-fw-image | emmc-img |gzip
+  IMAGE_NAME := $$(IMAGE_PREFIX)-$$(2)
+  DEVICE_DTS := armada-385-eliteun250
+endef
+TARGET_DEVICES += armada-385-eliteun250
+
 define Device/globalscale-mirabox
   $(Device/NAND-512K)
   DEVICE_DTS := armada-370-mirabox
